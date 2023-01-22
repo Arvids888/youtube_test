@@ -28,9 +28,11 @@ public class YoutubeTest {
        String channel = mainPage.getChannel(id);
        mainPage.clickVideo(id);
         videoPage.getTitle();
+        videoPage.getChannel();
 
 
         Assertions.assertEquals(title, videoPage.getTitle());
+        Assertions.assertEquals(channel, videoPage.getChannel());
         System.out.println(title);
         System.out.println(videoPage.getTitle());
         System.out.println(channel);

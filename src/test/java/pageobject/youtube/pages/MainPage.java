@@ -11,7 +11,7 @@ public class MainPage {
     private final By VIDEOS = By.xpath(".//div[contains(@id, 'content') and contains(@class, 'ytd-rich-item-renderer')]");
     private final By TITLES = By.xpath(".//a[contains(@class, 'yt-simple-endpoint focus-on')]//yt-formatted-string[contains(@class, 'style-scope ytd-rich')]");
 
-    private final By CHANNEL_NAME = By.xpath(".//a[contains(@class, 'yt-formatted-string')]");
+    private final By CHANNEL_NAMES = By.xpath(".//a[contains(@class, 'yt-formatted-string')]");
 
 
     private BaseFunc baseFunc;
@@ -26,36 +26,26 @@ public class MainPage {
         return this;
     }
 
-//    public WebElement selectVideoById(int id) {
-//        WebElement video = baseFunc.findElements(VIDEOS).get(id);
-////        for (WebElement videos : videosList) {
-////            if ()
-////        }
-////        WebElement video = videosList.get(id);
-//
-//
-////        String getTitle = getVideo.findElement(TITLES).getText();
-////
-////        System.out.println(getTitle);
-////        video.click();
-//        return video;
-//    }
+    public WebElement selectVideoById(int id) {
+        List<WebElement> videosList = baseFunc.findElements(VIDEOS);
+        WebElement video = videosList.get(id);
+
+        return video;
+    }
 
     public String getTitle(int id) {
-        List<WebElement> titles = baseFunc.findElements(TITLES);
-        String title = titles.get(id).getText();
+        String title = selectVideoById(id).findElement(TITLES).getText();
 
         return title;
     }
 
     public String getChannel(int id) {
-        List<WebElement> channels = baseFunc.findElements(CHANNEL_NAME);
-        String channel = channels.get(id).getText();
+        String channel = selectVideoById(id).findElement(CHANNEL_NAMES).getText();
         return channel;
     }
 
     public void clickVideo(int id) {
-        baseFunc.click(By.id(getTitle(id)));
+        baseFunc.click(selectVideoById(id));
     }
 
 
